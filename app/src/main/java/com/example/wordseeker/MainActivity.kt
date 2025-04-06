@@ -15,15 +15,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -60,14 +64,15 @@ fun NavBuild() {
             arguments = listOf(navArgument("categoryId") {type = NavType.StringType})
             ) { backStackEntry ->
                 val categoryId = backStackEntry.arguments?.getString("categoryId") ?: "aa"
-                PecsGrid(categoryId)
+                PecsGrid(categoryId, navController)
         }
+        composable("about") {About(navController)}
     }
 }
 
 @Composable
 fun CategoryCard(name: String, image: Int, navController: NavController) {
-    Column {
+    Column (horizontalAlignment = Alignment.CenterHorizontally){
         Image(
             painter = painterResource(image),
             contentDescription = null,
@@ -79,13 +84,13 @@ fun CategoryCard(name: String, image: Int, navController: NavController) {
                     navController.navigate("second/" + name)
                 }
         )
-        Text(text = name)
+        Text(text = name, textAlign = TextAlign.Center )
     }
 }
 
 @Composable
 fun CategoriesGrid(navController: NavController) {
-    Column {
+    Column (horizontalAlignment = Alignment.CenterHorizontally) {
         Text("")
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
@@ -98,25 +103,39 @@ fun CategoriesGrid(navController: NavController) {
                     navController)
             }
         }
+        Button(onClick = {
+            navController.navigate("about")
+        }, Modifier.padding(vertical = 50.dp)){ Text("About")}
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    WordSeekerTheme {
-        NavBuild()
+fun About(navController: NavController) {
+    Column (horizontalAlignment = Alignment.CenterHorizontally) {
+        Text("Developers - Venkat and Krishna. \n" +
+                "Made to help people with speech impairments which is like using PECS but with sounds. \n" +
+                "Also, helpful for my computer coding. \n" +
+                "Enjoy the App",
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .padding(vertical = 50.dp))
+        Button(onClick = {
+            navController.popBackStack()
+        }) { Text("Back")}
     }
 }
 
-
 @Composable
-fun PecsGrid(categoryId: String) {
+fun PecsGrid(categoryId: String, navController: NavController) {
     val context = LocalContext.current
     Column {
         Text(categoryId)
+        Button(onClick = {
+            navController.popBackStack()
+        }) { Text("Back")}
         LazyVerticalGrid(
-            columns = GridCells.Fixed(4)
+            columns = GridCells.Fixed(4),
+            Modifier.border(width = 3.dp, color = Color.Yellow)
         ) {
             val a2 = PecsStore.fetchPecs(categoryId).toTypedArray()
             items(a2.size) { index ->
@@ -131,7 +150,7 @@ fun PecsGrid(categoryId: String) {
 
 @Composable
 fun PecsCard(cardName: String, image:Int, onClick: () -> Unit) {
-    Column {
+    Column (horizontalAlignment = Alignment.CenterHorizontally){
         Image(
             painter = painterResource(image),
             contentDescription = null,
@@ -139,6 +158,7 @@ fun PecsCard(cardName: String, image:Int, onClick: () -> Unit) {
                 .padding(15.dp)
                 .width(100.dp)
                 .height(100.dp)
+                .border(2.dp, color = Color.Green)
                 .clickable {
                     Log.d("asdfd", "asfaff")
                     onClick()
@@ -147,16 +167,5 @@ fun PecsCard(cardName: String, image:Int, onClick: () -> Unit) {
         Text(text = cardName)
     }
 }
-
-
-
-@Preview(showBackground = true)
-@Composable
-fun PecsPreview() {
-    WordSeekerTheme {
-        PecsGrid("fruits")
-    }
-}
-
 
 
