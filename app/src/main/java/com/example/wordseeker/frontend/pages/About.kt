@@ -1,4 +1,4 @@
-package com.example.wordseeker.frontend
+package com.example.wordseeker.frontend.pages
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding

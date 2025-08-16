@@ -1,4 +1,4 @@
-package com.example.wordseeker.frontend
+package com.example.wordseeker.frontend.pages
 
 import android.media.MediaPlayer
 import androidx.compose.foundation.border

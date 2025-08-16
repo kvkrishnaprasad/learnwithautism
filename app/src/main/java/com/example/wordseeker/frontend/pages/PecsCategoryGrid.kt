@@ -1,4 +1,4 @@
-package com.example.wordseeker.frontend
+package com.example.wordseeker.frontend.pages
 
 import android.media.MediaPlayer
 import android.util.Log
@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.wordseeker.backend.store.PecsCategoryStore
 import com.example.wordseeker.backend.store.PecsItemStore
-import com.example.wordseeker.backend.store.PecsStore
 
 @Composable
 fun CategoryCard(name: String, image: Int, navController: NavController) {
