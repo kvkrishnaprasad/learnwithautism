@@ -1,4 +1,4 @@
-package com.example.wordseeker.store
+package com.example.wordseeker.backend.store
 
 import com.example.wordseeker.R
 
@@ -6,7 +6,6 @@ object PecsStore {
 
     private val categories: MutableSet<Category> = mutableSetOf()
     private val categoryToItems: MutableMap<String, MutableList<Pecs>> = mutableMapOf()
-
 
     fun addCategory(categoryName: String, image: Int) {
         categories.add(Category(categoryName, image))
@@ -24,21 +23,7 @@ object PecsStore {
 
 
     fun populate() {
-        addCategory("fruits", R.drawable.fruit_infused)
-        addCategory("professions", R.drawable.professions)
-        addCategory("rooms", R.drawable.house)
-        addCategory("animals", R.drawable.house)
-        addCategory("numbers", R.drawable.numbers)
-        addCategory("transport", R.drawable.house)
-        addCategory("People", R.drawable.house)
-        addCategory("Food", R.drawable.house)
-        addCategory("Snacks", R.drawable.house)
-        addCategory("Places", R.drawable.house)
-        addCategory("Items", R.drawable.house)
-        addCategory("birds7", R.drawable.house)
-        addCategory("birds8", R.drawable.house)
-        addCategory("birds9", R.drawable.house)
-        addCategory("Hi", R.drawable.house)
+
 
 
         addItem("fruits", Pecs("Banana", R.drawable.bananas_1000x, R.raw.banana01))

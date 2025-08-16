@@ -1,6 +1,7 @@
 package com.example.wordseeker.backend.store
 
-data class Category(
+data class PecsItem (
     val name: String,
-    val image: Int
+    val image: Int,
+    val sound: Int
 )

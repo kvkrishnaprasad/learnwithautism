@@ -1,4 +1,4 @@
-package com.example.wordseeker.store
+package com.example.wordseeker.backend.store
 
 data class Pecs (
     val name: String,
