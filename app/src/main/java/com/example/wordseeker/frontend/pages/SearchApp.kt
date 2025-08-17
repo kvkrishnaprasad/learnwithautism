@@ -56,7 +56,7 @@ fun SearchResults(query: String) {
         } else {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(4),
-                Modifier.border(width = 3.dp, color = Color.Yellow)
+                Modifier.border(width = 1.dp, color = Color.LightGray)
             ) {
                 items(filteredItems.size) { index ->
                     val word = filteredItems[index].word

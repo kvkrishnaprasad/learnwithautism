@@ -19,15 +19,15 @@ object PecsStoreInitializer {
         addCategory("fruits", R.drawable.fruit_infused)
         addCategory("professions", R.drawable.professions)
         addCategory("rooms", R.drawable.house)
-        addCategory("animals", R.drawable.house)
+        addCategory("animals", R.drawable.animals)
         addCategory("numbers", R.drawable.numbers)
-        addCategory("transport", R.drawable.house)
-        addCategory("People", R.drawable.house)
-        addCategory("Food", R.drawable.house)
+        addCategory("transport", R.drawable.transport)
+        addCategory("people", R.drawable.people)
+        addCategory("food", R.drawable.food)
         addCategory("Snacks", R.drawable.house)
-        addCategory("Places", R.drawable.house)
-        addCategory("Items", R.drawable.house)
-        addCategory("Hi", R.drawable.house)
+        addCategory("places", R.drawable.house)
+//        addCategory("Items", R.drawable.house)
+//        addCategory("Hi", R.drawable.house)
     }
 
     private fun initItems() {
@@ -44,6 +44,10 @@ object PecsStoreInitializer {
         WordIndex.insert("strawberry", 10)
 
         addNumbers()
+        addFruits()
+        addPlaces()
+        addPeople()
+        addRooms()
     }
 
     private fun addOne(categoryName:String, name: String, image: Int, sound: Int
@@ -74,5 +78,39 @@ object PecsStoreInitializer {
         addOne("numbers", "18", R.drawable.eighteen, R.raw.eighte01, 5)
         addOne("numbers", "19", R.drawable.nineteen, R.raw.ninete01, 5)
         addOne("numbers", "20", R.drawable.twenty, R.raw.twenty02, 5)
+    }
+
+    private fun addFruits() {
+        addOne("food", "vegetables", R.drawable.vegetables, R.raw.vegeta01, 10)
+        addOne("food", "fruits", R.drawable.fruit_infused, R.raw.fruit001, 10)
+    }
+
+    private fun addAnimas() {
+
+    }
+
+    private fun addPlaces() {
+        addOne("places","mcdonald's", R.drawable.mcdonalds, R.raw.mcdonalds, 10)
+        addOne("places","home", R.drawable.clayfarm_drive, R.raw.home0001, 10)
+        addOne("places","school", R.drawable.fawcett_primary_school, R.raw.school01, 10)
+        addOne("places","nana Car", R.drawable.toyota_yaris_cross, R.raw.car00001, 10)
+        addOne("places","amma Car", R.drawable.audi_q4_etron, R.raw.car00001, 10)
+        addOne("places","office", R.drawable.arm_office, R.raw.office01, 10)
+        addOne("places","waitrose", R.drawable.waitrose, R.raw.shop0001, 10)
+        addOne("places","gym", R.drawable.david_lloyds, R.raw.gym00001, 10)
+    }
+
+    private fun addPeople() {
+        addOne("people", "viya", R.drawable.apple, R.raw.one00001, 10)
+        addOne("people", "amma", R.drawable.apple, R.raw.one00001, 10)
+        addOne("people", "nana", R.drawable.apple, R.raw.one00001, 10)
+        addOne("people", "anna", R.drawable.apple, R.raw.one00001, 10)
+        addOne("people", "Navomi Maam", R.drawable.apple, R.raw.one00001, 10)
+    }
+
+    private fun addRooms() {
+        addOne("rooms","bedroom", R.drawable.bedroom, R.raw.bedroo01, 10)
+        addOne("rooms","Living room", R.drawable.bananas_1000x, R.raw.banana01, 10)
+        addOne("rooms","bathroom", R.drawable.bathroom, R.raw.bathro02, 10)
     }
 }
