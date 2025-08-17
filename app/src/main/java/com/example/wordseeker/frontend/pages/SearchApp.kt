@@ -63,8 +63,10 @@ fun SearchResults(query: String) {
                     val pecsItem = PecsItemStore.findById(word)
                     if (pecsItem != null) {
                         PecsCard(pecsItem.name, pecsItem.image) {
-                            val mediaPlayer = MediaPlayer.create(context, pecsItem.sound)
-                            mediaPlayer.start()
+                            if (pecsItem.sound != null) {
+                                val mediaPlayer = MediaPlayer.create(context, pecsItem.sound)
+                                mediaPlayer.start()
+                            }
                         }
                     }else
                     {

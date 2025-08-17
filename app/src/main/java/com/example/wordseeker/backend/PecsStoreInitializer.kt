@@ -2,11 +2,9 @@ package com.example.wordseeker.backend
 
 import com.example.wordseeker.R
 import com.example.wordseeker.backend.search.WordIndex
-import com.example.wordseeker.backend.store.Pecs
 import com.example.wordseeker.backend.store.PecsCategoryStore.addCategory
 import com.example.wordseeker.backend.store.PecsCategoryStore.addItemToCategory
 import com.example.wordseeker.backend.store.PecsItemStore.addItem
-import com.example.wordseeker.backend.store.PecsStore
 
 object PecsStoreInitializer {
 
@@ -24,8 +22,9 @@ object PecsStoreInitializer {
         addCategory("transport", R.drawable.transport)
         addCategory("people", R.drawable.people)
         addCategory("food", R.drawable.food)
-        addCategory("Snacks", R.drawable.house)
-        addCategory("places", R.drawable.house)
+//        addCategory("Snacks", R.drawable.house)
+        addCategory("places", R.drawable.places)
+        addCategory("actions", R.drawable.actions)
 //        addCategory("Items", R.drawable.house)
 //        addCategory("Hi", R.drawable.house)
     }
@@ -44,10 +43,18 @@ object PecsStoreInitializer {
         WordIndex.insert("strawberry", 10)
 
         addNumbers()
-        addFruits()
+        addFood()
         addPlaces()
         addPeople()
         addRooms()
+        addAnimals()
+        addActions()
+    }
+
+    private fun addOne(categoryName:String, name: String, image: Int, score: Int) {
+        addItem(name, image, sound = null)
+        addItemToCategory(categoryName, name)
+        WordIndex.insert(name, score)
     }
 
     private fun addOne(categoryName:String, name: String, image: Int, sound: Int
@@ -80,24 +87,31 @@ object PecsStoreInitializer {
         addOne("numbers", "20", R.drawable.twenty, R.raw.twenty02, 5)
     }
 
-    private fun addFruits() {
-        addOne("food", "vegetables", R.drawable.vegetables, R.raw.vegeta01, 10)
-        addOne("food", "fruits", R.drawable.fruit_infused, R.raw.fruit001, 10)
+    private fun addFood() {
+        val categoryName = "food"
+
+        addOne(categoryName, "vegetables", R.drawable.vegetables, R.raw.vegeta01, 10)
+        addOne(categoryName, "fruits", R.drawable.fruit_infused, R.raw.fruit001, 10)
+        addOne(categoryName, "dosa", R.drawable.dosa, 10)
     }
 
-    private fun addAnimas() {
-
+    private fun addAnimals() {
+        val categoryName = "animals"
+        addOne(categoryName ,"cat", R.drawable.cat, 20)
+        addOne(categoryName ,"dog", R.drawable.dog, 20)
     }
 
     private fun addPlaces() {
-        addOne("places","mcdonald's", R.drawable.mcdonalds, R.raw.mcdonalds, 10)
-        addOne("places","home", R.drawable.clayfarm_drive, R.raw.home0001, 10)
-        addOne("places","school", R.drawable.fawcett_primary_school, R.raw.school01, 10)
-        addOne("places","nana Car", R.drawable.toyota_yaris_cross, R.raw.car00001, 10)
-        addOne("places","amma Car", R.drawable.audi_q4_etron, R.raw.car00001, 10)
-        addOne("places","office", R.drawable.arm_office, R.raw.office01, 10)
-        addOne("places","waitrose", R.drawable.waitrose, R.raw.shop0001, 10)
-        addOne("places","gym", R.drawable.david_lloyds, R.raw.gym00001, 10)
+        val categoryName = "places"
+
+        addOne(categoryName,"mcdonald's", R.drawable.mcdonalds, R.raw.mcdonalds, 10)
+        addOne(categoryName,"home", R.drawable.clayfarm_drive, R.raw.home0001, 10)
+        addOne(categoryName,"school", R.drawable.fawcett_primary_school, R.raw.school01, 10)
+        addOne(categoryName,"nana Car", R.drawable.toyota_yaris_cross, R.raw.car00001, 10)
+        addOne(categoryName,"amma Car", R.drawable.audi_q4_etron, R.raw.car00001, 10)
+        addOne(categoryName,"office", R.drawable.arm_office, R.raw.office01, 10)
+        addOne(categoryName,"waitrose", R.drawable.waitrose, R.raw.shop0001, 10)
+        addOne(categoryName,"gym", R.drawable.david_lloyds, R.raw.gym00001, 10)
     }
 
     private fun addPeople() {
@@ -110,7 +124,14 @@ object PecsStoreInitializer {
 
     private fun addRooms() {
         addOne("rooms","bedroom", R.drawable.bedroom, R.raw.bedroo01, 10)
-        addOne("rooms","Living room", R.drawable.bananas_1000x, R.raw.banana01, 10)
+        addOne("rooms","Living room", R.drawable.bananas_1000x, R.raw.living_room, 10)
         addOne("rooms","bathroom", R.drawable.bathroom, R.raw.bathro02, 10)
+    }
+
+    private fun addActions() {
+        val categoryName = "actions"
+        addOne(categoryName, "eat", R.drawable.eat, 10)
+        addOne(categoryName, "drink", R.drawable.drink, 10)
+
     }
 }

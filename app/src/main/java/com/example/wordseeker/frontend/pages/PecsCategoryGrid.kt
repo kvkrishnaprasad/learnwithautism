@@ -92,7 +92,7 @@ fun PecsGrid(categoryId: String, navController: NavController) {
                     detectTransformGestures { _, _, zoomChange, _ ->
                         zoom *= zoomChange
                         // clamp zoom to avoid extremes
-                        zoom = zoom.coerceIn(0.5f, 3f)
+                        zoom = zoom.coerceIn(0.8f, 1.3f)
                     }
                 }
         ) {
@@ -103,8 +103,10 @@ fun PecsGrid(categoryId: String, navController: NavController) {
                     val pecs = PecsItemStore.findById(a2[index])
                     if (pecs != null) {
                         PecsCard(pecs.name, pecs.image) {
-                            val mediaPlayer = MediaPlayer.create(context, pecs.sound)
-                            mediaPlayer.start()
+                            if (pecs.sound != null) {
+                                val mediaPlayer = MediaPlayer.create(context, pecs.sound)
+                                mediaPlayer.start()
+                            }
                         }
                     }
                 }
@@ -126,7 +128,7 @@ fun PecsCard(cardName: String, image:Int, onClick: () -> Unit) {
                 .fillMaxSize()
                 .padding(5.dp)
 //                .width(100.dp)
-//                .height(100.dp)
+                .height(100.dp)
 
                 .clickable {
                     Log.d("asdfd", "asfaff")
