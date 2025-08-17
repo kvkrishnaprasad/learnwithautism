@@ -77,7 +77,7 @@ fun CategoriesGrid(navController: NavController) {
 @Composable
 fun PecsGrid(categoryId: String, navController: NavController) {
     var zoom by remember { mutableStateOf(1f) }
-    val columns = if (zoom > 1.1f) 2 else if (zoom > 1.05f) 3 else 4
+    val columns = if (zoom > 1.3f) 1 else if (zoom > 1.2f) 2 else if (zoom > 1.1f) 3 else 4
     val context = LocalContext.current
     Column {
         Text(categoryId)
@@ -92,7 +92,7 @@ fun PecsGrid(categoryId: String, navController: NavController) {
                     detectTransformGestures { _, _, zoomChange, _ ->
                         zoom *= zoomChange
                         // clamp zoom to avoid extremes
-                        zoom = zoom.coerceIn(0.8f, 1.3f)
+                        zoom = zoom.coerceIn(0.8f, 1.5f)
                     }
                 }
         ) {
@@ -102,12 +102,13 @@ fun PecsGrid(categoryId: String, navController: NavController) {
                 items(a2.size) { index ->
                     val pecs = PecsItemStore.findById(a2[index])
                     if (pecs != null) {
-                        PecsCard(pecs.name, pecs.image) {
+                        PecsCard(pecs.name, pecs.image, {
                             if (pecs.sound != null) {
                                 val mediaPlayer = MediaPlayer.create(context, pecs.sound)
                                 mediaPlayer.start()
                             }
-                        }
+                        }, zoom)
+
                     }
                 }
             }
@@ -116,7 +117,7 @@ fun PecsGrid(categoryId: String, navController: NavController) {
 }
 
 @Composable
-fun PecsCard(cardName: String, image:Int, onClick: () -> Unit) {
+fun PecsCard(cardName: String, image:Int, onClick: () -> Unit, zoom: Float) {
     Column (horizontalAlignment = Alignment.CenterHorizontally
         , modifier = Modifier.border(1.dp, color = Color.DarkGray)
             .padding(5.dp)
@@ -128,7 +129,7 @@ fun PecsCard(cardName: String, image:Int, onClick: () -> Unit) {
                 .fillMaxSize()
                 .padding(5.dp)
 //                .width(100.dp)
-                .height(100.dp)
+                .height(100.dp * zoom)
 
                 .clickable {
                     Log.d("asdfd", "asfaff")

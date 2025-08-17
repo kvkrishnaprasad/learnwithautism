@@ -30,18 +30,9 @@ object PecsStoreInitializer {
     }
 
     private fun initItems() {
-        addItem("banana", R.drawable.bananas_1000x, R.raw.banana01)
-        addItemToCategory("fruits", "banana")
-        WordIndex.insert("banana", 10)
 
-        addItem("apple", R.drawable.apple, R.raw.apple001)
-        addItemToCategory("fruits", "apple")
-        WordIndex.insert("apple", 10)
 
-        addItem("strawberry", R.drawable.strawberry, R.raw.banana01)
-        addItemToCategory("fruits", "strawberry")
-        WordIndex.insert("strawberry", 10)
-
+        addFruits()
         addNumbers()
         addFood()
         addPlaces()
@@ -49,6 +40,14 @@ object PecsStoreInitializer {
         addRooms()
         addAnimals()
         addActions()
+    }
+
+    private fun addFruits() {
+        val categoryName = "fruits"
+
+        addOne(categoryName, "banana", R.drawable.bananas_1000x, R.raw.banana01, 10)
+        addOne(categoryName, "apple", R.drawable.apple, R.raw.apple001, 10)
+        addOne(categoryName, "strawberry", R.drawable.strawberry, R.raw.strawb01, 10)
     }
 
     private fun addOne(categoryName:String, name: String, image: Int, score: Int) {
@@ -93,6 +92,12 @@ object PecsStoreInitializer {
         addOne(categoryName, "vegetables", R.drawable.vegetables, R.raw.vegeta01, 10)
         addOne(categoryName, "fruits", R.drawable.fruit_infused, R.raw.fruit001, 10)
         addOne(categoryName, "dosa", R.drawable.dosa, 10)
+
+        addOne(categoryName, "chocolate", R.drawable.chocolate, R.raw.chocol11, 5)
+        addOne(categoryName, "french_fries", R.drawable.large_fries, R.raw.french_fries,5)
+        addOne(categoryName, "candy", R.drawable.candy, R.raw.candy001, 5)
+        addOne(categoryName, "popcorn", R.drawable.popcorn, R.raw.popcor01, 5)
+
     }
 
     private fun addAnimals() {
@@ -124,7 +129,7 @@ object PecsStoreInitializer {
 
     private fun addRooms() {
         addOne("rooms","bedroom", R.drawable.bedroom, R.raw.bedroo01, 10)
-        addOne("rooms","Living room", R.drawable.bananas_1000x, R.raw.living_room, 10)
+        addOne("rooms","living room", R.drawable.bananas_1000x, R.raw.living_room, 10)
         addOne("rooms","bathroom", R.drawable.bathroom, R.raw.bathro02, 10)
     }
 
