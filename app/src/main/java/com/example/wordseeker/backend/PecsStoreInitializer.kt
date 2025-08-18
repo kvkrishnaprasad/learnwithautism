@@ -14,32 +14,42 @@ object PecsStoreInitializer {
     }
 
     private fun initCategories() {
-        addCategory("fruits", R.drawable.fruit_infused)
-        addCategory("professions", R.drawable.professions)
-        addCategory("rooms", R.drawable.house)
-        addCategory("animals", R.drawable.animals)
-        addCategory("numbers", R.drawable.numbers)
-        addCategory("transport", R.drawable.transport)
-        addCategory("people", R.drawable.people)
-        addCategory("food", R.drawable.food)
-//        addCategory("Snacks", R.drawable.house)
-        addCategory("places", R.drawable.places)
+        addCategory("important", R.drawable.important)
         addCategory("actions", R.drawable.actions)
-//        addCategory("Items", R.drawable.house)
-//        addCategory("Hi", R.drawable.house)
+        addCategory("people", R.drawable.people)
+
+        addCategory("places", R.drawable.places)
+        addCategory("rooms", R.drawable.house)
+
+        addCategory(categoryName = "prepositions", R.drawable.prepositions)
+        addCategory("numbers", R.drawable.numbers)
+        addCategory("food", R.drawable.food)
+        addCategory("fruits", R.drawable.fruit_infused)
+        addCategory("animals", R.drawable.animals)
+        addCategory("transport", R.drawable.transport)
+        addCategory("professions", R.drawable.professions)
     }
 
     private fun initItems() {
-
-
+        addImportant()
         addFruits()
         addNumbers()
+        addTransport()
         addFood()
         addPlaces()
         addPeople()
         addRooms()
         addAnimals()
         addActions()
+        addPrepositions()
+    }
+
+    private fun addImportant() {
+        val categoryName = "important"
+
+        addOne(categoryName, "yes", R.drawable.yes, 10)
+        addOne(categoryName, "no", R.drawable.no, 10)
+        addOne(categoryName, "potty", R.drawable.potty, 10)
     }
 
     private fun addFruits() {
@@ -116,15 +126,17 @@ object PecsStoreInitializer {
         addOne(categoryName,"amma Car", R.drawable.audi_q4_etron, R.raw.car00001, 10)
         addOne(categoryName,"office", R.drawable.arm_office, R.raw.office01, 10)
         addOne(categoryName,"waitrose", R.drawable.waitrose, R.raw.shop0001, 10)
+        addOne(categoryName, "tesco", R.drawable.tesco, 5)
         addOne(categoryName,"gym", R.drawable.david_lloyds, R.raw.gym00001, 10)
     }
 
     private fun addPeople() {
-        addOne("people", "viya", R.drawable.apple, R.raw.one00001, 10)
-        addOne("people", "amma", R.drawable.apple, R.raw.one00001, 10)
-        addOne("people", "nana", R.drawable.apple, R.raw.one00001, 10)
-        addOne("people", "anna", R.drawable.apple, R.raw.one00001, 10)
-        addOne("people", "Navomi Maam", R.drawable.apple, R.raw.one00001, 10)
+        addOne("people", "viya", R.drawable.viya, R.raw.one00001, 10)
+        addOne("people", "amma", R.drawable.amma, R.raw.one00001, 10)
+        addOne("people", "nanna", R.drawable.nanna, R.raw.one00001, 10)
+        addOne("people", "anna", R.drawable.anna, R.raw.one00001, 10)
+        addOne("people", "Navomi", R.drawable.navomi, R.raw.one00001, 10)
+        addOne("people", "ammamma", R.drawable.ammamma, R.raw.one00001, 10)
     }
 
     private fun addRooms() {
@@ -137,6 +149,24 @@ object PecsStoreInitializer {
         val categoryName = "actions"
         addOne(categoryName, "eat", R.drawable.eat, 10)
         addOne(categoryName, "drink", R.drawable.drink, 10)
+
+    }
+
+    private fun addTransport() {
+        val categoryName = "transport"
+        addOne(categoryName, "car", R.drawable.car, 9)
+        addOne(categoryName, "bus", R.drawable.bus, 9)
+        addOne(categoryName, "train", R.drawable.train, 9)
+        addOne(categoryName, "airplane", R.drawable.airplane, 9)
+
+    }
+
+    private fun addPrepositions() {
+        val categoryName = "prepositions"
+        addOne(categoryName, "in", R.drawable.`in`, 9)
+        addOne(categoryName, "on", R.drawable.on, 9)
+        addOne(categoryName, "above", R.drawable.above, 9)
+        addOne(categoryName, "under", R.drawable.under, 9)
 
     }
 }
