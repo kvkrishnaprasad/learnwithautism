@@ -2,17 +2,16 @@ package com.example.wordseeker.frontend
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.unit.IntSize
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.wordseeker.frontend.common.DragState
 import com.example.wordseeker.frontend.pages.About
 import com.example.wordseeker.frontend.pages.CategoriesGrid
 import com.example.wordseeker.frontend.pages.PecsGrid
 import com.example.wordseeker.frontend.pages.SearchApp
+import com.example.wordseeker.frontend.pages.SequencePage
 
 @Composable
 fun NavBuild(navController: NavHostController, onDragStart: (posInRoot: Offset, id: String) -> Unit,
@@ -29,6 +28,7 @@ fun NavBuild(navController: NavHostController, onDragStart: (posInRoot: Offset, 
         }
         composable("about") { About(navController) }
         composable("search") { SearchApp(navController)  }
+        composable("seq") { SequencePage(navController) }
     }
 }
 

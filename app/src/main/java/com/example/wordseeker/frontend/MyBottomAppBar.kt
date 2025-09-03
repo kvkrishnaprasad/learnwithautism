@@ -6,14 +6,15 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.wordseeker.frontend.pages.SequenceMaker
 
 @Composable
-fun MyBottomAppBar(navController: NavHostController) {
+fun MyBottomAppBar(navController: NavHostController, updateArea: (Rect) -> Unit, droppedItems: List<String>) {
     Column {
-        SequenceMaker()
+        SequenceMaker(updateArea, droppedItems)
         BottomAppBar(
             actions = {
                 IconButton(onClick = { navController.navigate("categories") }) {
@@ -33,7 +34,12 @@ fun MyBottomAppBar(navController: NavHostController) {
                         Icons.Default.Settings, contentDescription = "about",
                         modifier = Modifier.size(48.dp)
                     )
-
+                }
+                IconButton(onClick = {navController.navigate("seq")}) {
+                    Icon(
+                        Icons.Default.PlayArrow, contentDescription = "sequence",
+                        modifier = Modifier.size(48.dp)
+                    )
                 }
             },
         )
