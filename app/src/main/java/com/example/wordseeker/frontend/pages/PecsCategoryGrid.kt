@@ -1,7 +1,6 @@
 package com.example.wordseeker.frontend.pages
 
 import android.media.MediaPlayer
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -30,6 +29,9 @@ import androidx.navigation.NavController
 import com.example.wordseeker.backend.store.PecsCategoryStore
 import com.example.wordseeker.backend.store.PecsItemStore
 import androidx.compose.runtime.*
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.IntSize
+import com.example.wordseeker.frontend.common.DragState
 
 @Composable
 fun CategoryCard(name: String, image: Int, navController: NavController) {
@@ -75,9 +77,12 @@ fun CategoriesGrid(navController: NavController) {
 }
 
 @Composable
-fun PecsGrid(categoryId: String, navController: NavController) {
+fun PecsGrid(categoryId: String, navController: NavController, onDragStart: (posInRoot: Offset, id:String) -> Unit,
+             onDrag: (delta: Offset) -> Unit,
+             onDragEnd: () -> Unit,
+             onDragCancel: () -> Unit) {
     var zoom by remember { mutableStateOf(1f) }
-    val columns = if (zoom > 1.3f) 1 else if (zoom > 1.2f) 2 else if (zoom > 1.1f) 3 else 4
+    val columns = if (zoom > 1.5f) 1 else if (zoom > 1.3f) 2 else if (zoom > 1.1f) 3 else 4
     val context = LocalContext.current
     Column {
         Text(categoryId)
@@ -92,7 +97,7 @@ fun PecsGrid(categoryId: String, navController: NavController) {
                     detectTransformGestures { _, _, zoomChange, _ ->
                         zoom *= zoomChange
                         // clamp zoom to avoid extremes
-                        zoom = zoom.coerceIn(0.8f, 1.5f)
+                        zoom = zoom.coerceIn(0.8f, 1.6f)
                     }
                 }
         ) {
@@ -107,8 +112,7 @@ fun PecsGrid(categoryId: String, navController: NavController) {
                                 val mediaPlayer = MediaPlayer.create(context, pecs.sound)
                                 mediaPlayer.start()
                             }
-                        }, zoom)
-
+                        }, zoom, onDragStart, onDrag, onDragEnd, onDragCancel)
                     }
                 }
             }
@@ -116,26 +120,6 @@ fun PecsGrid(categoryId: String, navController: NavController) {
     }
 }
 
-@Composable
-fun PecsCard(cardName: String, image:Int, onClick: () -> Unit, zoom: Float) {
-    Column (horizontalAlignment = Alignment.CenterHorizontally
-        , modifier = Modifier.border(1.dp, color = Color.DarkGray)
-            .padding(5.dp)
-    ){
-        Image(
-            painter = painterResource(image),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(5.dp)
-//                .width(100.dp)
-                .height(100.dp * zoom)
 
-                .clickable {
-                    Log.d("asdfd", "asfaff")
-                    onClick()
-                }
-        )
-        Text(text = cardName)
-    }
-}
+
+
