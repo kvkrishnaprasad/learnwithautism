@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.painterResource
@@ -36,7 +37,6 @@ import com.example.wordseeker.backend.store.PecsItemStore
 @Composable
 fun SequenceMaker(updateArea: (Rect) -> Unit, droppedItems: List<String>) {
 
-
     var boxCoords by remember { mutableStateOf<LayoutCoordinates?>(null) }
     val scrollState = rememberScrollState()
 
@@ -44,7 +44,7 @@ fun SequenceMaker(updateArea: (Rect) -> Unit, droppedItems: List<String>) {
         modifier = Modifier
             .height(100.dp)
             .fillMaxWidth()
-            .background(Color.Green)
+            .background(Color(0x5F5650a4))
             .horizontalScroll(scrollState) // makes Row scrollable,
             .onGloballyPositioned { coords ->
                 boxCoords = coords
@@ -70,6 +70,7 @@ fun SequenceMaker(updateArea: (Rect) -> Unit, droppedItems: List<String>) {
                         )
                     }
         }
+        Box (Modifier.width(100.dp))
     }
 }
 

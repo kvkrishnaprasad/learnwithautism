@@ -41,7 +41,6 @@ fun SearchBar(query: String, onQueryChange: (String) -> Unit) {
 
 @Composable
 fun SearchResults(query: String) {
-    // Filter based on query
     val filteredItems = remember(query) {
         WordIndex.searchByPrefix(query)
     }
@@ -62,12 +61,15 @@ fun SearchResults(query: String) {
                     val word = filteredItems[index].word
                     val pecsItem = PecsItemStore.findById(word)
                     if (pecsItem != null) {
-//                        PecsCard(pecsItem.name, pecsItem.image, {
-//                            if (pecsItem.sound != null) {
-//                                val mediaPlayer = MediaPlayer.create(context, pecsItem.sound)
-//                                mediaPlayer.start()
-//                            }
-//                        }, 1.0f, )
+                        PecsCard(pecsItem.name, pecsItem.image, {
+                            if (pecsItem.sound != null) {
+                                val mediaPlayer = MediaPlayer.create(context, pecsItem.sound)
+                                mediaPlayer.start()
+                            }
+                        }, 1.0f,  onDragStart = { _, _ -> },
+                            onDrag = { _ -> },
+                            onDragEnd = {},
+                            onDragCancel = {})
                     }else
                     {
                         Text("• ${filteredItems[index]}")

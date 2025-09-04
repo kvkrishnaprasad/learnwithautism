@@ -17,7 +17,8 @@ import com.example.wordseeker.frontend.pages.SequencePage
 fun NavBuild(navController: NavHostController, onDragStart: (posInRoot: Offset, id: String) -> Unit,
              onDrag: (delta: Offset) -> Unit,
              onDragEnd: () -> Unit,
-             onDragCancel: () -> Unit) {
+             onDragCancel: () -> Unit,
+             droppedItems: List<String>) {
     NavHost(navController = navController, startDestination = "categories") {
         composable("categories") { CategoriesGrid(navController) }
         composable("second/{categoryId}",
@@ -28,7 +29,7 @@ fun NavBuild(navController: NavHostController, onDragStart: (posInRoot: Offset, 
         }
         composable("about") { About(navController) }
         composable("search") { SearchApp(navController)  }
-        composable("seq") { SequencePage(navController) }
+        composable("seq") { SequencePage(navController, droppedItems) }
     }
 }
 

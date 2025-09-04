@@ -37,21 +37,20 @@ fun MainApp() {
 
     var drag by remember { mutableStateOf(DragState()) }
 
-    var showSequenceBar by remember { mutableStateOf(true) }
-
-//    var dragOffset by remember { mutableStateOf(Offset.Zero) }
 
     var dropArea = Rect.Zero
 
-    val dropRegistry = remember { dropArea }
     val droppedItems = remember { mutableStateListOf<String>() }
 
     Box(Modifier.fillMaxSize()) {
         Scaffold(
             bottomBar = {
-                MyBottomAppBar(navController
-                , {rect -> dropArea = rect }
-                , droppedItems )},
+                MyBottomAppBar(
+                    navController,
+                    { rect -> dropArea = rect },
+                    droppedItems
+                )
+            },
         ) { innerPadding ->
             Box(
                 modifier = Modifier
@@ -66,7 +65,6 @@ fun MainApp() {
                         drag = drag.copy(posInRoot = drag.posInRoot + delta)
                     },
                     onDragEnd = {
-                        // On drag end, check drop targets
                         val ghostRect = Rect(
                             offset = drag.posInRoot,
                             size = Size(80f, 80f) // same as ghost size
@@ -74,22 +72,26 @@ fun MainApp() {
                         if (dropArea.overlaps(ghostRect)) {
                             droppedItems.add(drag.item.orEmpty())
                         }
-//                        handleDrop(dropRegistry.hit(drag.posInRoot))
                         drag = DragState() // reset
                     },
-                    onDragCancel = { drag = DragState() })
+                    onDragCancel = { drag = DragState() },
+                    droppedItems)
             }
         }
 
         if (drag.active && drag.item != null) {
-            Box(Modifier.fillMaxSize()
+            Box(Modifier
+                .fillMaxSize()
                 .zIndex(999f))
             {
                 Box(
                     modifier = Modifier
                         .size(100.dp)
-                        .offset {IntOffset(drag.posInRoot.x.roundToInt()
-                            , drag.posInRoot.y.roundToInt())}
+                        .offset {
+                            IntOffset(
+                                drag.posInRoot.x.roundToInt(), drag.posInRoot.y.roundToInt()
+                            )
+                        }
                         .padding(2.dp)
                         .background(Color.LightGray, RoundedCornerShape(6.dp))
                 ){

@@ -12,9 +12,16 @@ import androidx.navigation.NavHostController
 import com.example.wordseeker.frontend.pages.SequenceMaker
 
 @Composable
-fun MyBottomAppBar(navController: NavHostController, updateArea: (Rect) -> Unit, droppedItems: List<String>) {
+fun MyBottomAppBar(navController: NavHostController,
+                   updateArea: (Rect) -> Unit,
+                   droppedItems: List<String>,
+) {
+    var showSequenceBar by remember { mutableStateOf(true) }
+
     Column {
-        SequenceMaker(updateArea, droppedItems)
+        if (showSequenceBar) {
+            SequenceMaker(updateArea, droppedItems)
+        }
         BottomAppBar(
             actions = {
                 IconButton(onClick = { navController.navigate("categories") }) {
@@ -38,6 +45,12 @@ fun MyBottomAppBar(navController: NavHostController, updateArea: (Rect) -> Unit,
                 IconButton(onClick = {navController.navigate("seq")}) {
                     Icon(
                         Icons.Default.PlayArrow, contentDescription = "sequence",
+                        modifier = Modifier.size(48.dp)
+                    )
+                }
+                IconButton(onClick = {showSequenceBar = !showSequenceBar}) {
+                    Icon(
+                        Icons.Default.KeyboardArrowUp, contentDescription = "Toggle",
                         modifier = Modifier.size(48.dp)
                     )
                 }

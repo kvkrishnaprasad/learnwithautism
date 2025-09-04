@@ -121,7 +121,7 @@ object PecsStoreInitializer {
 
         addOne(categoryName,"mcdonald's", R.drawable.mcdonalds, R.raw.mcdonalds, 10)
         addOne(categoryName,"home", R.drawable.clayfarm_drive, R.raw.home0001, 10)
-        addOne(categoryName,"school", R.drawable.fawcett_primary_school, R.raw.school01, 10)
+        addOne(categoryName,"school", R.drawable.school, R.raw.school01, 10)
         addOne(categoryName,"nana Car", R.drawable.toyota_yaris_cross, R.raw.car00001, 10)
         addOne(categoryName,"amma Car", R.drawable.audi_q4_etron, R.raw.car00001, 10)
         addOne(categoryName,"office", R.drawable.arm_office, R.raw.office01, 10)
@@ -149,7 +149,8 @@ object PecsStoreInitializer {
         val categoryName = "actions"
         addOne(categoryName, "eat", R.drawable.eat, 10)
         addOne(categoryName, "drink", R.drawable.drink, 10)
-
+        addOne(categoryName, "brush_teeth", R.drawable.brush_teeth, 10)
+        addOne(categoryName, "walk", R.drawable.walk, 10)
     }
 
     private fun addTransport() {
@@ -158,7 +159,6 @@ object PecsStoreInitializer {
         addOne(categoryName, "bus", R.drawable.bus, 9)
         addOne(categoryName, "train", R.drawable.train, 9)
         addOne(categoryName, "airplane", R.drawable.airplane, 9)
-
     }
 
     private fun addPrepositions() {
