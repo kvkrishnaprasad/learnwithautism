@@ -9,6 +9,11 @@ object PecsItemStore {
         pecsItems[name] = item
     }
 
+    fun addItemGif(name: String, image: Int, sound: Int?) {
+        val item = PecsItem(name, image, sound, true)
+        pecsItems[name] = item
+    }
+
     fun findById(id: String) : PecsItem? {
         return pecsItems[id]
     }

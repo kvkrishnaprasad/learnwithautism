@@ -1,5 +1,6 @@
 package com.example.wordseeker.frontend.pages
 
+import GifImage
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -37,10 +38,12 @@ import com.example.wordseeker.frontend.common.DragState
 import kotlin.math.roundToInt
 
 @Composable
-fun PecsCard(cardName: String, image:Int, onClick: () -> Unit, zoom: Float, onDragStart: (posInRoot: Offset, id:String) -> Unit,
+fun PecsCard(cardName: String, image:Int, onClick: () -> Unit, zoom: Float,
+             onDragStart: (posInRoot: Offset, id:String) -> Unit,
              onDrag: (delta: Offset) -> Unit,
              onDragEnd: () -> Unit,
-             onDragCancel: () -> Unit) {
+             onDragCancel: () -> Unit,
+             isGif: Boolean = false) {
 
     var coords by remember { mutableStateOf<LayoutCoordinates?>(null) }
 
@@ -55,17 +58,8 @@ fun PecsCard(cardName: String, image:Int, onClick: () -> Unit, zoom: Float, onDr
                 modifier = Modifier.border(1.dp, color = Color.DarkGray)
                     .padding(5.dp)
             ) {
-                Image(
-                    painter = painterResource(image),
-                    contentDescription = null,
+                Box(
                     modifier = Modifier
-                        .zIndex(0f)
-                        .fillMaxSize()
-                        .padding(5.dp)
-                        .height(100.dp * zoom)
-                        .clickable {
-                            onClick()
-                        }
                         .pointerInput(Unit) {
                             detectDragGesturesAfterLongPress(
                                 onDragStart = { pressOffsetInItem ->
@@ -82,7 +76,26 @@ fun PecsCard(cardName: String, image:Int, onClick: () -> Unit, zoom: Float, onDr
                                 onDragCancel = onDragCancel
                             )
                         }
-                )
+
+                ) {
+                    if (isGif) {
+                        GifImage(image)
+                    } else {
+                        Image(
+                            painter = painterResource(image),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .zIndex(0f)
+                                .fillMaxSize()
+                                .padding(5.dp)
+                                .height(100.dp * zoom)
+                                .clickable {
+                                    onClick()
+                                }
+
+                        )
+                    }
+                }
                 Text(text = cardName)
             }
 

@@ -9,12 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.wordseeker.frontend.pages.SequenceMaker
+import com.example.wordseeker.frontend.pages.sequence.SequenceMaker
 
 @Composable
 fun MyBottomAppBar(navController: NavHostController,
                    updateArea: (Rect) -> Unit,
-                   droppedItems: List<String>,
+                   droppedItems: MutableList<String>,
 ) {
     var showSequenceBar by remember { mutableStateOf(true) }
 

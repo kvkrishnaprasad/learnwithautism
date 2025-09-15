@@ -5,6 +5,7 @@ import com.example.wordseeker.backend.search.WordIndex
 import com.example.wordseeker.backend.store.PecsCategoryStore.addCategory
 import com.example.wordseeker.backend.store.PecsCategoryStore.addItemToCategory
 import com.example.wordseeker.backend.store.PecsItemStore.addItem
+import com.example.wordseeker.backend.store.PecsItemStore.addItemGif
 
 object PecsStoreInitializer {
 
@@ -17,31 +18,61 @@ object PecsStoreInitializer {
         addCategory("important", R.drawable.important)
         addCategory("actions", R.drawable.actions)
         addCategory("people", R.drawable.people)
+        addCategory("replies", R.drawable.conversation)
 
         addCategory("places", R.drawable.places)
         addCategory("rooms", R.drawable.house)
+        addCategory("furniture", R.drawable.furniture)
 
-        addCategory(categoryName = "prepositions", R.drawable.prepositions)
+        addCategory("prepositions", R.drawable.prepositions)
+        addCategory("adjectives", R.drawable.adjectives)
         addCategory("numbers", R.drawable.numbers)
+
+        addCategory("professions", R.drawable.professions)
         addCategory("food", R.drawable.food)
         addCategory("fruits", R.drawable.fruit_infused)
         addCategory("animals", R.drawable.animals)
         addCategory("transport", R.drawable.transport)
-        addCategory("professions", R.drawable.professions)
+
     }
 
     private fun initItems() {
         addImportant()
-        addFruits()
+        addActions()
+        addPeople()
+        addReplies()
+
+
+        addPlaces()
+        addRooms()
+        addFurniture()
+
+
+        addPrepositions()
+        addAdjectives()
         addNumbers()
+
+        addProfessions()
+        addFruits()
         addTransport()
         addFood()
-        addPlaces()
-        addPeople()
-        addRooms()
         addAnimals()
-        addActions()
-        addPrepositions()
+    }
+
+    private fun addProfessions() {
+        val categoryName = "professions"
+
+        addOne(categoryName, "Hair Stylist", R.drawable.stylist, 6)
+        addOne(categoryName, "Doctor", R.drawable.doctor, 6)
+
+    }
+
+    private fun addReplies() {
+        val categoryName = "replies"
+
+        addOne(categoryName, "I am good", R.drawable.iamgood, 10)
+        addOne(categoryName, "Question", R.drawable.question, 10)
+
     }
 
     private fun addImportant() {
@@ -50,6 +81,8 @@ object PecsStoreInitializer {
         addOne(categoryName, "yes", R.drawable.yes, 10)
         addOne(categoryName, "no", R.drawable.no, 10)
         addOne(categoryName, "potty", R.drawable.potty, 10)
+        addOne(categoryName, "hands_on_lap", R.drawable.hands_on_lap, 10)
+        addOne(categoryName, "wait", R.drawable.wait, 10)
     }
 
     private fun addFruits() {
@@ -60,8 +93,19 @@ object PecsStoreInitializer {
         addOne(categoryName, "strawberry", R.drawable.strawberry, R.raw.strawb01, 10)
     }
 
+    private fun addFurniture() {
+        val categoryName = "furniture"
+        addOne(categoryName, "chair", R.drawable.chair, 10)
+    }
+
     private fun addOne(categoryName:String, name: String, image: Int, score: Int) {
         addItem(name, image, sound = null)
+        addItemToCategory(categoryName, name)
+        WordIndex.insert(name, score)
+    }
+
+    private fun addOneGif(categoryName:String, name: String, image: Int, score: Int) {
+        addItemGif(name, image, sound = null)
         addItemToCategory(categoryName, name)
         WordIndex.insert(name, score)
     }
@@ -140,9 +184,15 @@ object PecsStoreInitializer {
     }
 
     private fun addRooms() {
-        addOne("rooms","bedroom", R.drawable.bedroom, R.raw.bedroo01, 10)
-        addOne("rooms","living room", R.drawable.bananas_1000x, R.raw.living_room, 10)
-        addOne("rooms","bathroom", R.drawable.bathroom, R.raw.bathro02, 10)
+        val categoryName = "rooms"
+
+        addOne(categoryName,"bedroom", R.drawable.bedroom2, R.raw.bedroo01, 10)
+        addOne(categoryName,"living room", R.drawable.living, R.raw.living_room, 10)
+        addOne(categoryName,"bathroom", R.drawable.bathroom, R.raw.bathro02, 10)
+        addOne(categoryName, "kitchen", R.drawable.kitchen, 10)
+        addOne(categoryName, "dining room", R.drawable.dining, 10)
+        addOne(categoryName, "stairs", R.drawable.stairs, 10)
+        addOne(categoryName, "garden", R.drawable.garden, 10)
     }
 
     private fun addActions() {
@@ -151,6 +201,8 @@ object PecsStoreInitializer {
         addOne(categoryName, "drink", R.drawable.drink, 10)
         addOne(categoryName, "brush_teeth", R.drawable.brush_teeth, 10)
         addOne(categoryName, "walk", R.drawable.walk, 10)
+        addOne(categoryName, "push", R.drawable.push, 8)
+        addOne(categoryName, "pull", R.drawable.pull, 8)
     }
 
     private fun addTransport() {
@@ -159,6 +211,13 @@ object PecsStoreInitializer {
         addOne(categoryName, "bus", R.drawable.bus, 9)
         addOne(categoryName, "train", R.drawable.train, 9)
         addOne(categoryName, "airplane", R.drawable.airplane, 9)
+    }
+
+    private fun addAdjectives() {
+        val categoryName = "adjectives"
+        addOneGif(categoryName, "fast", R.raw.sonic, 9)
+        addOneGif(categoryName, "slow", R.raw.slow_turtle, 9)
+
     }
 
     private fun addPrepositions() {

@@ -1,5 +1,6 @@
 package com.example.wordseeker.frontend
 
+import GifImage
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -41,6 +43,11 @@ fun MainApp() {
     var dropArea = Rect.Zero
 
     val droppedItems = remember { mutableStateListOf<String>() }
+
+    LaunchedEffect(Unit) {
+        droppedItems.add("cat")
+        droppedItems.add("car")
+    }
 
     Box(Modifier.fillMaxSize()) {
         Scaffold(
@@ -97,16 +104,20 @@ fun MainApp() {
                 ){
                     val pecs = PecsItemStore.findById(drag.item.orEmpty())
                     if (pecs != null) {
-                        Image(
-                            painter = painterResource(pecs.image),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .zIndex(0f)
-                                .fillMaxSize()
-                                .padding(5.dp)
-                                .height(100.dp)
+                        if (pecs.gif) {
+                            GifImage(pecs.image)
+                        } else {
+                            Image(
+                                painter = painterResource(pecs.image),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .zIndex(0f)
+                                    .fillMaxSize()
+                                    .padding(5.dp)
+                                    .height(100.dp)
 
-                        )
+                            )
+                        }
                     }
                 }
 
